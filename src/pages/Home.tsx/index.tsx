@@ -2,6 +2,7 @@
 import React, { useEffect, useState} from 'react'
 import Header from "../../components/header";
 import { getAllCategories, getItemByCategory } from '../../services/api'
+import CardDetails from '../../components/cardDetails';
 
 const Home: React.FC = () => {
 
@@ -11,10 +12,10 @@ const Home: React.FC = () => {
   }
 
   interface IProducts {
-    available_quantity: number;
-    category_id: string;
+    available_quantity?: number;
+    category_id?: string;
     id: string;
-    permalink:string;
+    permalink?:string;
     price: number;
     thumbnail: string;
     title: string;
@@ -55,6 +56,15 @@ const Home: React.FC = () => {
     )
   }
 
+  const renderCardDetails = () => {
+    if(products.length === 0) return  <p>Digite algum termo de pesquisa ou escolha uma categoria</p>
+    return products.map((el, index) => <CardDetails key={index} Product={el} />)
+
+    // products.map((el, index) => {
+    //   return <CardDetails key={index} Product={el} />
+    // })
+  }
+
   return(
     <div>
       <Header />
@@ -63,6 +73,8 @@ const Home: React.FC = () => {
         <input type="text" id="search-input" placeholder="...digite aqui" />
         <button type="button">Pesquisar </button>
       </section>
+      
+        { renderCardDetails()}
       <section>
         {
           categories && renderCategories()
