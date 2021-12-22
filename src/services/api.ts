@@ -10,18 +10,33 @@ const getAllCategories = async() => {
   })
   .then((data) => data.data)
   .catch((err) => err);
+
+  console.log(response, 'response ')
   return response
 }
 
 const getItemByName = async(query: string) => {
   const url = `https://api.mercadolibre.com/sites/MLB/search?q=${query}`
 
-  await axios({
+  const response = await axios({
     method: 'get',
     url,
   })
-  .then((data) => data)
+  .then((data) => data.data.results)
   .catch((err) => err);
+  return response
+}
+
+const getItemById = async(id: string) => {
+  const url = `https://api.mercadolibre.com//items?ids=${id}`
+
+  const response = await axios({
+    method: 'get',
+    url,
+  })
+  .then((data) => data.data)
+  .catch((err) => err);
+  return response
 }
 
 const getItemByCategory = async(id: string) => {
@@ -37,4 +52,4 @@ const getItemByCategory = async(id: string) => {
 }
 
 
-export { getAllCategories, getItemByName, getItemByCategory}
+export { getAllCategories, getItemByName, getItemByCategory, getItemById }

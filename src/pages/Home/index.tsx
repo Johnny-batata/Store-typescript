@@ -2,7 +2,9 @@
 import React, { useEffect, useState} from 'react'
 import Header from "../../components/header";
 import { getAllCategories, getItemByCategory } from '../../services/api'
-import CardDetails from '../../components/cardDetails';
+import CardsSections from './components/CardsSections';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Home: React.FC = () => {
 
@@ -19,26 +21,27 @@ const Home: React.FC = () => {
     price: number;
     thumbnail: string;
     title: string;
-  }
+    pictures: Object
 
+  }
 
   const [categories, setCategories] = useState<ICategorys[]>([]);
   const [products, setProducts] = useState<IProducts[]>([]);
 
   const fetchAllCategories = async () => {
     const data = await getAllCategories()
+    console.log(data, 'data')
     setCategories(data)
   }
 
   const handleCategoryClick = async (id:string) => {
     const data = await getItemByCategory(id)
-    console.log('bata', data, id, products)
     setProducts(data)
   }
 
   useEffect(() => {
     fetchAllCategories()
-  })
+  }, [])
 
   const renderCategories = () => {
     return (
@@ -56,30 +59,23 @@ const Home: React.FC = () => {
     )
   }
 
-  const renderCardDetails = () => {
+  const renderCardSection = () => {
     if(products.length === 0) return  <p>Digite algum termo de pesquisa ou escolha uma categoria</p>
-    return products.map((el, index) => <CardDetails key={index} Product={el} />)
-
-    // products.map((el, index) => {
-    //   return <CardDetails key={index} Product={el} />
-    // })
+    return products.map((el, index) => <CardsSections key={index} Product={el} />)
   }
 
   return(
     <div>
       <Header />
-      <section>
+      {/* <section>
         <label id="search-input"/>
         <input type="text" id="search-input" placeholder="...digite aqui" />
         <button type="button">Pesquisar </button>
-      </section>
-      
-        { renderCardDetails()}
-      <section>
-        {
-          categories && renderCategories()
-        }
-      </section>
+      </section> */}
+      <section className="cardGroup">
+        { renderCardSection() }
+        </section>
+        { renderCategories() }
     </div>
   )
 }
