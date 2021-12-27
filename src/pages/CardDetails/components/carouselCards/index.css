@@ -1,66 +1,63 @@
-.slick-next {
+/* .slick-next {
   right: 25px;
-}
+} */
 
-.slick-prev:before, .slick-next:before {
+/* .slick-prev:before, .slick-next:before {
   font-size:45px
   
-}
+} */
 
-.slick-track {
+/* .slick-track {
   margin: 100px;
   padding: 20px;
   margin-right: 300px;
-}
+} */
 
-.img-carousel {
+/* .img-carousel {
   padding: 10px;
   background-color: white;
   width: 150px !important;
   border-radius: 50px;
   max-height: 150px;
+} */
 
-}
-
-.slick-prev {
+/* .slick-prev {
   left: 3% !important;
   z-index: 1;
   background-color: green;
   font-size:45px;
   width: 50px;
   height: 50px;
-}
-.slick-next {
+} */
+
+/* .slick-next {
   right: 3% !important;
   z-index: 1;
-  background-color: green;
-
   font-size:45px;
   width: 50px;
   height: 50px;
+} */
 
-}
-.div-carousel {
-  background-color: red;
+/* .div-carousel {
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
-}
+} */
 
-.slick-slider slick-initialized {
+/* .slick-slider slick-initialized {
   max-width: 50% !important;
-}
-.slick-slide slick-cloned {
+} */
+/* .slick-slide slick-cloned {
   max-width: 200px;
   margin-left: 200px;
   margin-right: 200px;
-}
+} */
 
-.card-deck {
+/* .card-deck {
   display: flex;
   flex-direction: column;
   background-color: blue;
 
-}
+} */
 

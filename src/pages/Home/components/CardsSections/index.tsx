@@ -1,13 +1,9 @@
 import React from "react";
 import { useHistory} from 'react-router-dom'
 
-// import { Card, CardTitle, CardImg, CardBody, Button, CardGroup, CardSubtitle, CardText } from 'reactstrap'
 import { Card, CardMedia, CardActions, Typography, CardContent, Button } from '@mui/material';
 
 import './index.css'
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 interface IProduct {
   id: string;
@@ -45,20 +41,6 @@ const CardsSections = ( {Product }: IProps ) => {
       <Button size="small" onClick={ () => history.push(`card-details/${id}`) }>Ver mais</Button>
     </CardActions>
   </Card>
-    // <Card>
-    //   <CardImg
-    //     alt={title}
-    //     src={thumbnail}
-    //     top
-    //     width="20%"
-    //   />
-    //   <CardBody>
-    //     <CardTitle tag="h5" >{title}</CardTitle>
-    //     <CardSubtitle>{price}</CardSubtitle>
-    //     <Button  onClick={ () => history.push(`card-details/${id}`) }> Ver mais</Button>
-    //   </CardBody>
-    //  </Card>
-
   )
 }
 
