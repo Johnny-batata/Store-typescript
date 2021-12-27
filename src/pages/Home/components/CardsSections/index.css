@@ -1,0 +1,23 @@
+.card-img {
+  width: 45% !important ;
+}
+
+.card {
+  margin: 15px;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cardGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card:hover
+{
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+}

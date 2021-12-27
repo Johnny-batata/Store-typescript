@@ -4,6 +4,7 @@ import { useHistory} from 'react-router-dom'
 // import { Card, CardTitle, CardImg, CardBody, Button, CardGroup, CardSubtitle, CardText } from 'reactstrap'
 import { Card, CardMedia, CardActions, Typography, CardContent, Button } from '@mui/material';
 
+import './index.css'
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -30,6 +31,7 @@ const CardsSections = ( {Product }: IProps ) => {
       height="140"
       image={thumbnail}
       alt={title}
+      className="card-img"
     />
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">

@@ -5,8 +5,6 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import './index.css'
 
-
-
 interface IPictures {
   url: string;
   id: string;
@@ -31,7 +29,6 @@ const CarouselCards:React.FC<IProduct> = ({ products }) => {
        ))
       ) 
     } 
-
 
     const settings = {
       dots: true,
