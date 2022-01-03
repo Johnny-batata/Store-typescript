@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import Carousel, { Dots } from '@brainhubeu/react-carousel';
+import Carousel, { Dots, slidesToScrollPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import './index.css'
 
@@ -34,18 +34,26 @@ const CarouselImgs = ({pictures} : IProduct) => {
       <Carousel
         value={value}
         onChange={onChange}
+
         plugins={[
           'arrows',
-          'infinite'
+          'infinite',
+          {
+            resolve: slidesToScrollPlugin,
+            options: {
+             numberOfSlides: 1,
+            },
+          },
         ]}
       >
         {renderPictures()}
         </Carousel>
-      <Dots
+        <Dots
       value={value}
       onChange={onChange}
       thumbnails={  renderPictures('small')  }
     />
+
     </div>
 
     )

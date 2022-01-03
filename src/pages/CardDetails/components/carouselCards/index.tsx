@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React from "react";
 import {  Link } from 'react-router-dom'
 
 // import 'slick-carousel/slick/slick.css';
@@ -79,6 +79,32 @@ const CarouselCards: React.FC<IProduct> = ({ products }) => {
       }
     },
   ]}
+  breakpoints={{
+    640: {
+      plugins: [
+        'arrows',
+        'infinite',
+       {
+         resolve: slidesToShowPlugin,
+         options: {
+          numberOfSlides: 1
+         }
+       },
+     ]
+    },
+    900: {
+      plugins: [
+            'arrows',
+    'infinite',
+       {
+         resolve: slidesToShowPlugin,
+         options: {
+          numberOfSlides: 2
+         }
+       },
+     ]
+    }
+  }}
  >          
  { renderCards()} 
           {/* <div>

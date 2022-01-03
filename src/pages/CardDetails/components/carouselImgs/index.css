@@ -1,19 +1,18 @@
 .img-small {
-  /* width: 100px; */
-  /* width: 70%; */
   max-width: 170px;
   max-height: 120px;
-  /* height: 100px; */
 }
 
-/* .BrainhubCarousel__container {
-  width: 70%;
-} */
+.img {
+  width: 100%
+}
 
 .carousel-div-pics {
-
   width: 70%;
+  max-width: 774px;
 
+
+  min-width: 360px ;
 }
 
 .carousel-section-pics {
@@ -22,3 +21,10 @@
   flex-direction: column;
   align-items: center;
 }
+
+.BrainhubCarousel__dots {
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  /* overflow: hidden; */
+}
+

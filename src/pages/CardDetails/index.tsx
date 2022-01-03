@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getItemById, getItemByCategory } from "../../services/api";
 import { useParams } from "react-router";
 import CarouselCards from "./components/carouselCards"; 
-// import Slider from 'react-slick';
 import CarouselImgs from "./components/carouselImgs";
+import Header from "../../components/header";
+import './index.css'
 
+const ramdomText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis tortor, consectetur ut erat vitae, ultricies dignissim ex. Cras faucibus rhoncus nibh a vestibulum. Nullam in ante sit amet augue imperdiet tincidunt sed vel mauris. Donec non felis efficitur, sollicitudin sem vel, volutpat diam. Mauris dignissim orci vitae nulla ornare, nec lacinia nisl mollis. Sed dapibus eros eu lacus accumsan, et porttitor ex lobortis. Aenean orci nisl, pretium eget elit porta, elementum convallis nisl. Curabitur nisi lacus, faucibus id tellus ac, eleifend luctus lorem. Duis eget quam eget lorem fringilla consectetur. Curabitur iaculis imperdiet nulla et fermentum. Sed vitae velit placerat, semper erat sit amet, mollis est. Praesent eget eros quis nibh faucibus lacinia eu quis justo. Nunc bibendum justo quis gravida elementum. Donec velit metus, luctus sed volutpat eu, imperdiet in dui. Nullam purus risus, feugiat in ex eu, elementum commodo libero.'
 
 const CardDetails = () => {
   interface IParams {
@@ -26,7 +28,11 @@ interface IProducts {
   pictures: IPictures[];
   title: string;
   sold_quantity: number;
-  accepts_mercadopago: string
+  accepts_mercadopago: Boolean;
+  condition: string;
+  warranty: string;
+  status: string;
+  descriptions: string[]
 }
 
 
@@ -60,18 +66,29 @@ interface IProducts {
 
   const renderProductDetails = () => {
     return products.map((el, index) =>{
+      console.log(el.accepts_mercadopago, typeof el.accepts_mercadopago, 'tipos legais')
       return(
         <section key={index}>
+          <div className="div-title">
           <h1>{el.title}</h1>
-          {/* <img src={el.thumbnail} alt={el.title} /> */}      
+          </div>
           <section className="carousel-section-pics">
         { <CarouselImgs  pictures={pictures} />}
       </section>
-          <p> Preço: R$ {el.price} </p>
+          <p> Preço: R$ {el.price},00 </p>
           <p> Quantidade disponivel: {el.available_quantity} </p>
           <p> Unidades vendidas: {el.sold_quantity} </p>
-          <p> Aceita mercado pago? {el.accepts_mercadopago === 'true' ? 'Sim' : 'Não'} </p>
+          <p> Aceita mercado pago? {el.accepts_mercadopago === true ? 'Sim' : 'Não'} </p>
+          <p> Usado? {el.condition === 'new' ? 'Sim' : 'Não'} </p>
+          <p> Garantia: {el.warranty ? el.warranty : 'Não'} </p>
+          <p> Status: {el.status  === 'active' ? 'Ativo' : 'Inativo'} </p>
+          <p> Descrição: 
+            <br />
+             {el.descriptions.length > 0 ? el.descriptions : ramdomText } </p>
+          <div>
+            <h1>Produtos Parecidos: </h1>
           { <CarouselCards products={relatedCategorys} />   }
+          </div>
         </section>
       )
     })
@@ -80,6 +97,7 @@ interface IProducts {
 
   return(
     <div>
+      <Header />
       { products && renderProductDetails()}
 
     </div>
