@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getItemById, getItemByCategory } from "../../services/api";
 import { useParams } from "react-router";
 import CarouselCards from "./components/carouselCards"; 
-import Slider from 'react-slick';
+// import Slider from 'react-slick';
+import CarouselImgs from "./components/carouselImgs";
 
 
 const CardDetails = () => {
@@ -17,13 +18,15 @@ interface IPictures {
 
 interface IProducts {
   available_quantity?: number;
-  category_id?: string | undefined;
+  category_id?: any;
   id: string;
   permalink?:string;
   price: number;
   thumbnail: string;
   pictures: IPictures[];
   title: string;
+  sold_quantity: number;
+  accepts_mercadopago: string
 }
 
 
@@ -31,61 +34,54 @@ interface IProducts {
   const params: IParams = useParams()
   const [products, setProducts] = useState<IProducts[]>([]);
   const [relatedCategorys, setRelatedCategorys] = useState<IProducts[]>([]);
+  const [pictures, setPictures] = useState<IPictures[]>([]);
 
 
   const fetchGetItem = async () => {
     const data = await getItemById(params.id)
-    console.log(params, 'params', data[0].body)
+    console.log(params, 'params', data[0].body )
     setProducts([data[0].body])
+    setPictures(data[0].body.pictures)
+    await fetchCategorys(data[0].body.category_id)
   }
-
-  const fetchCategorys = async() => {
-    const data = await getItemByCategory(products[0].category_id)
-    console.log(data, 'categorys', products[0].category_id)
+  
+  const fetchCategorys = async(categoryId: string) => {
+    const data = await getItemByCategory(categoryId)
+    console.log(data, 'categorys' )
     setRelatedCategorys(data)
   }
   useEffect(() => {
     fetchGetItem()
-    
   }, [])
-  useEffect(()=> {
-    console.log('estou sendo chamado que nem um idiota  ;-;')  
-    fetchCategorys()
+  useEffect(() => {
+    fetchGetItem()
+  }, [params])
 
-  }, [products])
 
   const renderProductDetails = () => {
-    return products.map((el) =>{
+    return products.map((el, index) =>{
       return(
-        <section>
+        <section key={index}>
           <h1>{el.title}</h1>
-          <img src={el.thumbnail} alt={el.title} />
-          <p>{el.price} </p>
-          <p>{el.available_quantity} </p>
+          {/* <img src={el.thumbnail} alt={el.title} /> */}      
+          <section className="carousel-section-pics">
+        { <CarouselImgs  pictures={pictures} />}
+      </section>
+          <p> Preço: R$ {el.price} </p>
+          <p> Quantidade disponivel: {el.available_quantity} </p>
+          <p> Unidades vendidas: {el.sold_quantity} </p>
+          <p> Aceita mercado pago? {el.accepts_mercadopago === 'true' ? 'Sim' : 'Não'} </p>
+          { <CarouselCards products={relatedCategorys} />   }
         </section>
       )
     })
   }
 
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    speed: 500
-  };
-
 
   return(
     <div>
-
       { products && renderProductDetails()}
-      {/* <Slider { ...settings }>
-        {
-          relatedCategorys.map((el, index) => <CarouselCards key={index} products={el} />)
-        }
-      </Slider> */}
+
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory} from 'react-router-dom'
+import {  Link} from 'react-router-dom'
 
 import { Card, CardMedia, CardActions, Typography, CardContent, Button } from '@mui/material';
 
@@ -19,7 +19,6 @@ interface IProps {
 
 const CardsSections = ( {Product }: IProps ) => {
   const { title, price, thumbnail, id } = Product
-  const history = useHistory()
   return(
     <Card sx={{ maxWidth: 345 }} className="card" >
     <CardMedia
@@ -38,7 +37,9 @@ const CardsSections = ( {Product }: IProps ) => {
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small" onClick={ () => history.push(`card-details/${id}`) }>Ver mais</Button>
+    <Link to={`card-details/${id}`}>
+      <Button size="small">Ver mais</Button>
+      </Link>
     </CardActions>
   </Card>
   )

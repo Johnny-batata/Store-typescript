@@ -1,12 +1,13 @@
 import React, { useState} from "react";
-import { useHistory} from 'react-router-dom'
+import {  Link } from 'react-router-dom'
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import Slider from 'react-slick';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
+// import Slider from 'react-slick';
 import './index.css'
 import { Card, CardMedia, CardActions, Typography, CardContent, Button } from '@mui/material';
-
+import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 interface IPictures {
   url: string;
@@ -14,7 +15,6 @@ interface IPictures {
 }
 
 interface ProductsInterior {
-  // pictures: IPictures[];
   available_quantity?: number;
   category_id?: string | undefined;
   id: string;
@@ -26,68 +26,81 @@ interface ProductsInterior {
 }
 
 interface IProduct {
-  products: ProductsInterior
+  products: ProductsInterior[]
 }
 
-const CarouselCards:React.FC<IProduct> = ({ products }) => {
-  const { title, thumbnail, price, id } = products
-  const history = useHistory()
+const CarouselCards: React.FC<IProduct> = ({ products }) => {
 
-  // const CarouselCards:React.FC<IProduct> = ({ products }) => {
-  // const { pictures } = products
-  // const renderPictures = () =>{
-  //   return (
-  //         pictures.map(( {url, id}: IPictures, index: number) => (
-  //         <div className="div-carousel" key={index} >
-  //            <img  src={url} alt={id} className="img-carousel" />
-  //         </div>
-  //      ))
-  //     ) 
-  //   } 
 
   const renderCards = () =>{
     return (
-          <div className="div-carousel" >
-            <Card sx={{ maxWidth: 345 }} className="card" >
-            <CardMedia
-              component="img"
-              height="140"
-              image={thumbnail}
-              alt={title}
-              className="card-img"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Preço: R$ {price}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small" onClick={ () => history.push(`card-details/${id}`) }>Ver mais</Button>
-            </CardActions>
-          </Card>
-            </div>
+           products.map((el) => 
+          <div className="div-carousel" key={el.id} >
+          <Card sx={{ maxWidth: 345 }} 
+          className="card"  
+          >
+          <CardMedia
+            component="img"
+            height="140"
+            image={el.thumbnail}
+            alt={el.title}
+            className="card-img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {el.title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Preço: R$ {el.price}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Link to={`${el.id}`}>
+            <Button size="small" >Ver mais</Button>
+            </Link>
+          </CardActions>
+        </Card>
+          </div>
+          )
        )
-      // ) 
     } 
 
-    // const settings = {
-    //   dots: true,
-    //   infinite: true,
-    //   slidesToShow: 3,
-    //   slidesToScroll: 1,
-    //   autoplay: true,
-    //   autoplaySpeed: 2000,
-    //   rtl: true
-    // };
+
+
     return (
-      <div>
-        {/* <Slider {...settings}> */}
-          {/* { renderCards()} */}
-        {/* </Slider> */}
-      </div>
+<Carousel
+  plugins={[
+    'arrows',
+    'infinite',
+    {
+      resolve: slidesToShowPlugin,
+      options: {
+       numberOfSlides: 5
+      }
+    },
+  ]}
+ >          
+ { renderCards()} 
+          {/* <div>
+            <h3>1</h3>
+           </div>
+          <div>
+            <h3>2</h3>
+           </div>
+           <div>
+            <h3>3</h3>
+           </div>
+           <div>
+             <h3>4</h3>
+           </div>
+          <div>
+             <h3>5</h3>
+           </div>
+           <div>
+             <h3>6</h3>
+           </div> */}
+        </Carousel>
+
     );
 }
 

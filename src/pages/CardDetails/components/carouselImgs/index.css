@@ -1,0 +1,24 @@
+.img-small {
+  /* width: 100px; */
+  /* width: 70%; */
+  max-width: 170px;
+  max-height: 120px;
+  /* height: 100px; */
+}
+
+/* .BrainhubCarousel__container {
+  width: 70%;
+} */
+
+.carousel-div-pics {
+
+  width: 70%;
+
+}
+
+.carousel-section-pics {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
